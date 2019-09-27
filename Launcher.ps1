@@ -20,10 +20,17 @@ Set-Location $PSScriptRoot
 . ".\Submodules\ScriptingToolkit\Libraries\STCommon.ps1"
 . ".\Submodules\Restore-NuGet\Restore-NuGetPackage.ps1"
 . ".\Libraries\Initialize-iText7.ps1"
+. ".\Menus\StartupMenu.ps1"
 Clear-Host
 
 #get the config file's Fully Qualified name to pass into Get-ConfigData
-$configFQName = Get-ChildItem -Path Config\config.ini -ErrorAction SilentlyContinue | Select-Object FullName
+$configLocation = $null
+if (Test-Path "Development\config.ini") {
+    $configLocation = "Development\config.ini"
+} else {
+    $configLocation = "Config\config.ini"
+}
+$configFQName = Get-ChildItem -Path $configLocation -ErrorAction SilentlyContinue | Select-Object FullName
 
 #load the config.ini
 Test-ConfigFile $configFQName
@@ -40,4 +47,6 @@ $LauncherLogFile = $configData.LogDirectory + "\Launcher.log"
 #Create the log file.
 Write-STLog -Message $("Started " + $configData.ToolkitName) -OutFile $LauncherLogFile
 
-#Launch the Statup Menu.
+#Launch the Startup Menu.
+Clear-Host
+Show-StartupMenu

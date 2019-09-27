@@ -12,8 +12,11 @@
 *.exe
 
 
-Development/
+Development/*
+!Development/activeclass.json
+!Development/config.ini
 Dependencies/
+Classes/
 
 # Visual Studio 2015/2017 cache/options directory
 
