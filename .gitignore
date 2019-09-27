@@ -12,9 +12,10 @@
 *.exe
 
 
-Development/*
-!Development/activeclass.json
-!Development/config.ini
+#Development/*
+#!Development/activeclass.json
+#!Development/config.ini
+
 Dependencies/
 Classes/
 
