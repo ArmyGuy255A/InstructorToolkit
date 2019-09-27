@@ -1,0 +1,6 @@
+[submodule "Submodules\\Restore-NuGet"]
+	path = Submodules\\Restore-NuGet
+	url = https://github.com/slavashar/Restore-NuGet
+[submodule "Submodules\\ScriptingToolkit"]
+	path = Submodules\\ScriptingToolkit
+	url = https://github.com/ArmyGuy255A/ScriptingToolkit
