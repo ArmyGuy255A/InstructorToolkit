@@ -21,6 +21,7 @@ Set-Location $PSScriptRoot
 . ".\Submodules\Restore-NuGet\Restore-NuGetPackage.ps1"
 . ".\Libraries\Initialize-iText7.ps1"
 . ".\Menus\StartupMenu.ps1"
+. ".\Libraries\Common.ps1"
 Clear-Host
 
 #get the config file's Fully Qualified name to pass into Get-ConfigData
@@ -37,7 +38,14 @@ Test-ConfigFile $configFQName
 $configData = @{}
 $configData = Get-ConfigData $configFQName.FullName.ToString()
 
+#Import any custom form actions that require complex processing
+foreach ($srcFile in $configData.CustomFormActions) {
+    . "$srcFile"
+}
+
+
 #make the log directory
+
 if (!$(Test-Path $configData.LogDirectory)) { 
     mkdir $configData.LogDirectory | Out-Null
 }
