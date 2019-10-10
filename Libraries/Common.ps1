@@ -44,6 +44,12 @@ function Copy-File {
     } 
 
     If (Test-Path $DestinationFile) {
+        Clear-Host
+        $result = Show-STPromptForChoiceMenu -Title "File Already Exists" -Prompt "Do you want to copy the file anyways?" -Choices @("Yes", "No") -DefaultChoice 1
+        Clear-Host
+        #Break out if the file already exists
+        if ($result -eq 'N') { return $SourceFileItem.FullName }
+
         $i = 0   
         $BaseDestFile = Get-Item $DestinationFile     
         While (Test-Path $DestinationFile) {
@@ -55,6 +61,6 @@ function Copy-File {
     }
     
     Copy-Item -Path $SourceFile -Destination $DestinationFile -Force
-}
 
-Copy-File -SourceFile C:\Scripts\InstructorToolkit\PDFTemplates\a1059.pdf -DestinationDirectory C:\Scripts\InstructorToolkit\PDFTemplates
+    return $DestinationFile
+}
